@@ -3,8 +3,8 @@
   -webkit-touch-callout: none; /* Disable touch callouts */
 }
 
-input, textarea, [contenteditable] * {
-  -webkit-user-select: auto;  /* Allow selection for input elements and those with contenteditable attribute */
+input, textarea {
+  -webkit-user-select: text;  /* Allow selection for input elements */
 }
 
 .content-padded {

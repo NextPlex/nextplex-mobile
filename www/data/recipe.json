@@ -1,0 +1,12 @@
+[
+  {
+    "recipe_id": 1,
+    "name": "BLT sandwich",
+    "description": "The bacon, lettuce and tomato sandwich, commonly referred to as the BLT, is a classic sandwich that can be found almost everywhere."
+  },
+  {
+    "recipe_id": 2,
+    "name": "Borscht",
+    "description": "Borscht, or borsch is a hearty beetroot vegetable soup considered to originate from Ukraine or Western Russia. The soup is part of the local culinary heritage of many Eastern and Central European nations. It is also a staple dish in Eastern Europe, and made its way into United States cuisine by way of Jewish immigrants (as well as other Eastern Europeans)."
+  }
+]

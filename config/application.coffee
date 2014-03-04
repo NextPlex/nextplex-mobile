@@ -1,10 +1,10 @@
 # For an explanation of the steroids.config properties, see the guide at
 # http://guides.appgyver.com/steroids/guides/project_configuration/config-application-coffee/
 
-steroids.config.name = "app"
+steroids.config.name = "My New Application"
 
 # -- Initial Location --
-steroids.config.location = "http://localhost/index.html"
+steroids.config.location = "http://localhost/views/recipe/index.html"
 
 # -- Tab Bar --
 # steroids.config.tabBar.enabled = true

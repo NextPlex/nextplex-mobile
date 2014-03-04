@@ -1,9 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.appgyver.helloSteroids" version="3.1.2" xmlns="http://www.w3.org/ns/widgets">
-    <!--
-      The following preferences are explained in more detail in the config.android.xml guide:
-        http://guides.appgyver.com/steroids/guides/project_configuration/config-xml-android/
-      -->
+<widget id="com.appgyver.helloSteroids" version="2.0.0"
+  xmlns="http://www.w3.org/ns/widgets">
 
-    <preference name="fullscreen" value="false" />
+  <name>Hello Steroids</name>
+  <description>
+      A sample Steroids application.
+  </description>
+  <author email="contact@appgyver.com" href="http://www.appgyver.com/steroids">
+      AppGyver Steroids Team
+  </author>
+  <access origin="*" />
 </widget>

@@ -4,24 +4,6 @@ describe("Restangular", function() {
   var accountsModel, restangularAccounts, restangularAccount0, restangularAccount1;
   var messages, newAccount;
 
-  // Utils
-  // Apply "sanitizeRestangularOne" function to an array of items
-  function sanitizeRestangularAll(items) {
-    var all = _.map(items, function(item) {
-      return sanitizeRestangularOne(item);
-    });
-    return sanitizeRestangularOne(all);
-  };
-
-  // Remove all Restangular/AngularJS added methods in order to use Jasmine toEqual between the retrieve resource and the model
-  function sanitizeRestangularOne(item) {
-    return _.omit(item, "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch",
-      "$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST",
-      "customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all","doGET", "doPOST",
-      "doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl", "several", "getRequestedUrl", "clone",
-      "reqParams", "withHttpConfig", "oneUrl", "allUrl", "getParentList");
-  };
-
   // Load required modules
   beforeEach(angular.mock.module("restangular"));
 
@@ -45,12 +27,14 @@ describe("Restangular", function() {
     $httpBackend.when("OPTIONS", "/accounts").respond();
 
     $httpBackend.whenGET("/accounts").respond(accountsModel);
+    $httpBackend.whenJSONP("/accounts").respond(accountsModel);
     $httpBackend.whenGET("/accounts/0,1").respond(accountsModel);
     $httpBackend.whenGET("/accounts/messages").respond(messages);
     $httpBackend.whenGET("/accounts/1/message").respond(messages[0]);
     $httpBackend.whenGET("/accounts/1/messages").respond(messages);
     $httpBackend.whenGET("/accounts/0").respond(accountsModel[0]);
     $httpBackend.whenGET("/accounts/1").respond(accountsModel[1]);
+    $httpBackend.whenJSONP("/accounts/1").respond(accountsModel[1]);
     $httpBackend.whenGET("/accounts/1/transactions").respond(accountsModel[1].transactions);
     $httpBackend.whenGET("/accounts/1/transactions/1").respond(accountsModel[1].transactions[1]);
 
@@ -91,6 +75,94 @@ describe("Restangular", function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
+  describe("Interceptors", function() {
+    it("Should add multiple request and response interceptors", function() {
+      Restangular.addRequestInterceptor(function(elem) {
+        elem.firstRequestInterceptor = true;
+        return elem;
+      });
+      Restangular.addRequestInterceptor(function(elem) {
+        elem.secondRequestInterceptor = true;
+        return elem;
+      });
+      Restangular.addFullRequestInterceptor(function(elem) {
+        elem.thirdRequestInterceptor = true;
+        return {
+          element: elem
+        };
+      });
+
+      Restangular.addResponseInterceptor(function(elem) {
+        elem.firstResponseInterceptor = true;
+        return elem;
+      });
+
+      Restangular.addResponseInterceptor(function(elem) {
+        elem.secondResponseInterceptor = true;
+        return elem;
+      });
+
+      $httpBackend.whenPOST("/list").respond(function(method, url, data, headers) {
+        var elem = angular.fromJson(data);
+        expect(elem.firstRequestInterceptor).toBeDefined();
+        expect(elem.secondRequestInterceptor).toBeDefined();
+        expect(elem.thirdRequestInterceptor).toBeDefined();
+        return [200, elem, ""];
+      });
+
+      $httpBackend.expectPOST('/list');
+
+       Restangular.all('list').post({name: "Gonto"}).then(function(elem) {
+        expect(elem.firstResponseInterceptor).toBeDefined();
+        expect(elem.secondResponseInterceptor).toBeDefined();
+       });
+
+       $httpBackend.flush();
+
+
+    });
+  });
+
+  describe("Transformers", function() {
+    it("Should decorate element both on server and local by default", function() {
+
+      Restangular.extendModel('accounts', function(account) {
+        account.extended = function() {return true;}
+        return account;
+      });
+
+      Restangular.one('accounts', 1).get().then(function(account) {
+        expect(account.extended).toBeDefined();
+      });
+
+      var local = {};
+      Restangular.restangularizeElement(null, local, 'accounts');
+      expect(local.extended).toBeDefined();
+
+      $httpBackend.flush();
+    });
+
+    it("Should decorate element only server if config set", function() {
+
+      Restangular.extendModel('accounts', function(account) {
+        account.extended = function() {return true;}
+        return account;
+      });
+
+      Restangular.setTransformOnlyServerElements(true)
+
+      Restangular.one('accounts', 1).get().then(function(account) {
+        expect(account.extended).toBeDefined();
+      });
+
+      var local = {};
+      Restangular.restangularizeElement(null, local, 'accounts');
+      expect(local.extended).toBeUndefined();
+
+      $httpBackend.flush();
+    });
+  });
+
   describe("With Url", function() {
     it("Shouldn't add suffix to URL", function() {
       var suffixRestangular = Restangular.withConfig(function(RestangularConfigurer) {
@@ -101,6 +173,34 @@ describe("Restangular", function() {
       suffixRestangular.allUrl('accounts', 'http://accounts.com/all').getList();
       $httpBackend.flush();
     });
+  });
+
+  describe("JSONp", function() {
+    it("should work for get", function() {
+      Restangular.setJsonp(true);
+      Restangular.one('accounts', 1).get();
+
+      $httpBackend.expectJSONP('/accounts/1');
+      $httpBackend.flush();
+    });
+
+    it("should work for getList", function() {
+      Restangular.setJsonp(true);
+      Restangular.all('accounts').getList();
+
+      $httpBackend.expectJSONP('/accounts');
+      $httpBackend.flush();
+    });
+
+    it("shouldn't override post", function() {
+      Restangular.setJsonp(true);
+      restangularAccounts.post({id: 2, user: "Someone"});
+
+      $httpBackend.expectPOST('/accounts').respond(201, '');
+      $httpBackend.flush();
+    });
+
+    
   });
 
   describe("Local data", function() {
@@ -130,6 +230,20 @@ describe("Restangular", function() {
       expect(obj.amount).toEqual(3.1416);      
     });
 
+    it("Should be restangularized by default", function() {
+      Restangular.extendModel('accounts', function(account) {
+        account.extended = function() {return true;}
+        return account;
+      });
+
+      var promise = Restangular.one('accounts', 1).get();
+      var obj = promise.$object;
+      expect(obj).toBeDefined();
+      expect(obj.extended).toBeDefined();
+
+      $httpBackend.flush();
+    });
+
     it("Should work for single get", function() {
       var promise = Restangular.all('accounts').getList();
       var list = promise.$object;
@@ -146,7 +260,7 @@ describe("Restangular", function() {
   describe("ALL", function() {
     it("getList() should return an array of items", function() {
       restangularAccounts.getList().then(function(accounts) {
-        expect(sanitizeRestangularAll(accounts)).toEqual(sanitizeRestangularAll(accountsModel));
+        expect(Restangular.stripRestangular(accounts)).toEqual(Restangular.stripRestangular(accountsModel));
       });
 
       $httpBackend.flush();
@@ -155,7 +269,7 @@ describe("Restangular", function() {
     it("several getList() should return an array of items", function() {
       $httpBackend.expectGET('/accounts/0,1');
       Restangular.several("accounts", 0, 1).getList().then(function(accounts) {
-        expect(sanitizeRestangularAll(accounts)).toEqual(sanitizeRestangularAll(accountsModel));
+        expect(Restangular.stripRestangular(accounts)).toEqual(Restangular.stripRestangular(accountsModel));
       });
 
       $httpBackend.flush();
@@ -170,7 +284,7 @@ describe("Restangular", function() {
 
     it("get(id) should return the item with given id", function() {
       restangularAccounts.get(0).then(function(account) {
-        expect(sanitizeRestangularOne(account)).toEqual(sanitizeRestangularOne(accountsModel[0]));
+        expect(Restangular.stripRestangular(account)).toEqual(Restangular.stripRestangular(accountsModel[0]));
       });
 
       $httpBackend.flush();
@@ -184,7 +298,7 @@ describe("Restangular", function() {
 
     it("Custom GET methods should work", function() {
       restangularAccounts.customGETLIST("messages").then(function(msgs) {
-        expect(sanitizeRestangularAll(msgs)).toEqual(sanitizeRestangularAll(messages));
+        expect(Restangular.stripRestangular(msgs)).toEqual(Restangular.stripRestangular(messages));
       });
 
       $httpBackend.flush();
@@ -280,7 +394,7 @@ describe("Restangular", function() {
           $httpBackend.expectGET('/accounts?foo=1').respond(accountsModel);
           return restangularAccounts.getList({foo: 1});
         }).then(function(accounts) {
-          expect(sanitizeRestangularAll(accounts)).toEqual(sanitizeRestangularAll(accountsModel));
+          expect(Restangular.stripRestangular(accounts)).toEqual(Restangular.stripRestangular(accountsModel));
         });
 
       $httpBackend.flush();
@@ -290,8 +404,8 @@ describe("Restangular", function() {
   describe("ONE", function() {
     it("get() should return a JSON item", function() {
       restangularAccount1.get().then(function(account) {
-        expect(sanitizeRestangularOne(account))
-          .toEqual(sanitizeRestangularOne(accountsModel[1]));
+        expect(Restangular.stripRestangular(account))
+          .toEqual(Restangular.stripRestangular(accountsModel[1]));
       });
 
       $httpBackend.flush();
@@ -299,8 +413,8 @@ describe("Restangular", function() {
 
     it("Should make RequestLess connections with one", function() {
       restangularAccount1.one("transactions", 1).get().then(function(transaction) {
-        expect(sanitizeRestangularOne(transaction))
-          .toEqual(sanitizeRestangularOne(accountsModel[1].transactions[1]));
+        expect(Restangular.stripRestangular(transaction))
+          .toEqual(Restangular.stripRestangular(accountsModel[1].transactions[1]));
       });
 
       $httpBackend.flush();
@@ -308,8 +422,8 @@ describe("Restangular", function() {
 
     it("Should make RequestLess connections with all", function() {
       restangularAccount1.all("transactions").getList().then(function(transactions) {
-        expect(sanitizeRestangularAll(transactions))
-          .toEqual(sanitizeRestangularAll(accountsModel[1].transactions));
+        expect(Restangular.stripRestangular(transactions))
+          .toEqual(Restangular.stripRestangular(accountsModel[1].transactions));
       });
 
       $httpBackend.flush();
@@ -318,7 +432,7 @@ describe("Restangular", function() {
 
     it("Custom GET methods should work", function() {
       restangularAccount1.customGET("message").then(function(msg) {
-        expect(sanitizeRestangularOne(msg)).toEqual(sanitizeRestangularOne(messages[0]));
+        expect(Restangular.stripRestangular(msg)).toEqual(Restangular.stripRestangular(messages[0]));
       });
 
       $httpBackend.flush();
@@ -343,8 +457,8 @@ describe("Restangular", function() {
     it("should return an array when accessing a subvalue", function() {
       restangularAccount1.get().then(function(account) {
         account.getList("transactions").then(function(transactions) {
-          expect(sanitizeRestangularAll(transactions))
-            .toEqual(sanitizeRestangularAll(accountsModel[1].transactions));
+          expect(Restangular.stripRestangular(transactions))
+            .toEqual(Restangular.stripRestangular(accountsModel[1].transactions));
         });
       });
 

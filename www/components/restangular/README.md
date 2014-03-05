@@ -333,6 +333,9 @@ You can add as many element transformers as you want. The signature of this meth
 
 * **addElementTransformer(route, isCollection, transformer)**: Transformer is called with all elements that have been restangularized and match the specification regarding if it's a collection or not (true | false)
 
+#### setTransformOnlyServerElements
+This sets wether transformers will be run for local objects and not by objects returned by the server. This is by default true but can be changed to false if needed (Most people won't need this).
+
 
 #### setOnElemRestangularized
 This is a hook. After each element has been "restangularized" (Added the new methods from Restangular), this will be called. It means that if you receive a list of objects in one call, this method will be called first for the collection and then for each element of the collection.
@@ -350,7 +353,10 @@ This callback is a function that has 3 parameters:
 This can be used together with `addRestangularMethod` (Explained later) to add custom methods to an element
 
 
-#### setResponseInterceptor (or setResponseExtractor. It's an Alias)
+#### setResponseInterceptor
+**This is depracated. Use addResponseInterceptor since you can add more than one**.
+
+#### addResponseInterceptor
 The responseInterceptor is called after we get each response from the server. It's a function that receives this arguments:
 
 * **data**: The data received got from the server
@@ -365,6 +371,9 @@ Some of the use cases of the responseInterceptor are handling wrapped responses 
 The responseInterceptor must return the restangularized data element.
 
 #### setRequestInterceptor
+**This is depracated. Use addRequestInterceptor since you can add more than one**.
+
+#### addRequestInterceptor
 The requestInterceptor is called before sending any data to the server. It's a function that must return the element to be requested. This function receives the following arguments:
 
 * **element**: The element to send to the server.
@@ -373,23 +382,28 @@ The requestInterceptor is called before sending any data to the server. It's a f
 * **url**: The relative URL being requested. For example: `/api/v1/accounts/123`
 
 #### setFullRequestInterceptor
-The fullRequestInterceptor is similar to the `requestInterceptor` but more powerful. It lets you change the element, the request parameters and the headers as well.
+**This is depracated. Use addFullRequestInterceptor since you can add more than one**.
+
+#### addFullRequestInterceptor
+This adds a new fullRequestInterceptor. The fullRequestInterceptor is similar to the `requestInterceptor` but more powerful. It lets you change the element, the request parameters and the headers as well.
 
 It's a function that receives the same as the `requestInterceptor` plus the headers and the query parameters (in that order).
 
-It must return an object with the following properties:
+It can return an object with any (or all) of following properties:
 * **headers**: The headers to send
 * **params**: The request parameters to send
 * **element**: The element to send
 * **httpConfig**: The httpConfig to call with
 
+If a property isn't returned, the one sent is used.
+
 #### setErrorInterceptor
-The errorInterceptor is called whenever there's an error. It's a function that receives the response as a parameter.
+The errorInterceptor is called whenever there's an error. It's a function that receives the response and the promise as parameters.
 
 The errorInterceptor function, whenever it returns `false`, prevents the promise linked to a Restangular request to be executed.
 All other return values (besides `false`) are ignored and the promise follows the usual path, eventually reaching the success or error hooks.
 
-The feature to prevent the promise to complete is usefull whenever you need to intercept each Restangular error response for every request in your AngularJS application in a single place, increasing debugging capabilities and hooking security features in a single place.
+The feature to prevent the promise to complete is useful whenever you need to intercept each Restangular error response for every request in your AngularJS application in a single place, increasing debugging capabilities and hooking security features in a single place.
 
 #### setRestangularFields
 
@@ -399,7 +413,7 @@ Restangular required 3 fields for every "Restangularized" element. These are:
 * route: Name of the route of this element. Default: route
 * parentResource: The reference to the parent resource. Default: parentResource
 * restangularCollection: A boolean indicating if this is a collection or an element. Default: restangularCollection
-* cannonicalId: If available, the path to the cannonical ID to use. Usefull for PK changes
+* cannonicalId: If available, the path to the cannonical ID to use. Useful for PK changes
 * etag: Where to save the ETag received from the server. Defaults to `restangularEtag`
 * selfLink: The path to the property that has the URL to this item. If your REST API doesn't return a URL to an item, you can just leave it blank. Defaults to `href`
 
@@ -409,6 +423,10 @@ All of these fields except for `id` and `selfLink` are handled by Restangular, s
 #### setMethodOverriders
 
 You can now Override HTTP Methods. You can set here the array of methods to override. All those methods will be sent as POST and Restangular will add an X-HTTP-Method-Override header with the real HTTP method we wanted to do.
+
+#### setJsonp
+
+By setting this value to true, both `get` and `getList` will be performed using JSonp instead of the regular GET.
 
 #### setDefaultRequestParams
 
@@ -496,12 +514,13 @@ app.config(function(RestangularProvider) {
     });
     
     // ..or use the full request interceptor, setRequestInterceptor's more powerful brother!
-    RestangularProvider.setFullRequestInterceptor(function(element, operation, route, url, headers, params) {
+    RestangularProvider.setFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {
       delete element.name;      
       return {
         element: element,
         params: _.extend(params, {single: true}),
-        headers: headers
+        headers: headers,
+        httpConfig: httpConfig
       };
     });
     
@@ -1072,7 +1091,7 @@ Also, when using Restangular with version >= 1.1.4, in case you're using Restang
 Users reported that this server frameworks play real nice with Restangular, as they let you create a Nested Restful Resources API easily:
 
 * Ruby on Rails
-* CakePHP, Laravel and FatFREE for PHP
+* CakePHP, Laravel and FatFREE, Symfony2 with RestBundle, Silex for PHP
 * Play1 & 2 for Java & scala
 * Restify and Express for NodeJS
 * Tastypie and Django Rest Framework for Django 

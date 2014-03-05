@@ -12,9 +12,9 @@
   ],
   "dependencies": {
     "steroids-js": "3.1.x",
-    "angular": "1.2.6",
-    "angular-touch": "1.2.6",
-    "underscore": "1.5.1",
-    "restangular": "1.2.2"
+    "angular": "1.2.14",
+    "angular-touch": "1.2.14",
+    "underscore": "1.5.2",
+    "restangular": "1.3.1"
   }
 }

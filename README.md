@@ -12,5 +12,6 @@ This app is based on the Steroids multi-page app (MPA) demo app built with Angul
 5. As you edit your project's HTML files, press Enter in the Steroids console to push changes to all updated devices.
 
 
-## Original pitch & design slides
-[View them on Speaker Deck](https://speakerdeck.com/nathos/nextplex-mobile-design-prototypes)
+## Other resources:
+  * [Original pitch & design concept slides](https://speakerdeck.com/nathos/nextplex-mobile-design-prototypes)
+  * [A good set of tips for using Steroids.js](http://marcgg.com/blog/2014/04/09/phonegap-steroids-hybrid-native-app-tips/)

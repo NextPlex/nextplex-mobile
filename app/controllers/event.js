@@ -17,7 +17,10 @@ nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
   });
 
   // -- Native navigation
-  steroids.view.navigationBar.show("Events");
+  // steroids.view.navigationBar.show("Events");});
+  steroids.view.navigationBar.show({
+    titleImagePath: "/images/nextplex_logo@2x.png"
+});
 
 });
 

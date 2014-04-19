@@ -7,6 +7,7 @@ nextplex.controller('UserShowCtrl', function ($scope, $filter, UserRestangular) 
   UserRestangular.one('users', steroids.view.params['id']).get().then( function(user) {
     // Then select the one based on the view's id query parameter
     $scope.user = user;
+    $scope.no_user = !user;
     steroids.view.navigationBar.show($scope.user.name);
   });
 

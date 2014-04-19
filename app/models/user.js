@@ -14,9 +14,9 @@ module.factory('UserRestangular', function(Restangular) {
 
 	return Restangular.withConfig(function(RestangularConfigurer) {
 
-		RestangularConfigurer.setBaseUrl('http://nextplex.com/api/rochester-ny');
+		RestangularConfigurer.setBaseUrl('http://nextplex.com/rochester-ny');
 		// RestangularConfigurer.setBaseUrl('/data');
-		// RestangularConfigurer.setRequestSuffix('.json');
+		RestangularConfigurer.setRequestSuffix('.json');
 
 
 	});

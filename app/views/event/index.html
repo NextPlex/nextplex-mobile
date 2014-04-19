@@ -1,0 +1,16 @@
+<div ng-app="nextplex">
+
+  <div ng-controller="IndexCtrl">
+    <div class="topcoat-list__container">
+
+      <ul class="topcoat-list">
+        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events">
+          {{ event.name }}
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>

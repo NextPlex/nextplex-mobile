@@ -30,9 +30,10 @@ nextplex.controller('ShowCtrl', function ($scope, $filter, EventRestangular) {
   EventRestangular.all('events').getList().then( function(events) {
     // Then select the one based on the view's id query parameter
     $scope.event = $filter('filter')(events, {id: steroids.view.params['id']})[0];
+    steroids.view.navigationBar.show($scope.event.name);
   });
 
   // -- Native navigation
-  steroids.view.navigationBar.show("Event " + steroids.view.params.id );
+  steroids.view.navigationBar.show("");
 
 });

@@ -32,6 +32,8 @@
     <preference name="KeyboardShrinksView" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
 
+    <!-- Disable back-swipe gesture -->
+    <preference name="EnablePopGestureRecognition" value="false" />
 
     <access origin="*" />
 </widget>

@@ -12,7 +12,7 @@ steroids.config.tabBar.tabs = [
   {
     title: "Home"
     icon: "icons/home@2x.png"
-    location: "http://localhost/views/recipe/index.html"
+    location: "http://localhost/views/event/index.html"
   },
   {
     title: "NextPlex.com"

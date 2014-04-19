@@ -11,7 +11,10 @@ This app is based on the Steroids multi-page app (MPA) demo app built with Angul
   2. On OS X, you can also type `sim` in the Steroids console to open the iOS Simulator
 5. As you edit your project's HTML files, press Enter in the Steroids console to push changes to all updated devices.
 
+## Core technology documentation
+  * [AngularJS 1.2.14 API Documentation](https://code.angularjs.org/1.2.14/docs/api)
+  * [Steroids API reference](http://docs.appgyver.com/en/edge/index.html)
 
-## Other resources:
+## Other resources
   * [Original pitch & design concept slides](https://speakerdeck.com/nathos/nextplex-mobile-design-prototypes)
   * [A good set of tips for using Steroids.js](http://marcgg.com/blog/2014/04/09/phonegap-steroids-hybrid-native-app-tips/)

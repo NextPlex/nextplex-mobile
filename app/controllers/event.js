@@ -1,9 +1,6 @@
-var nextplex = angular.module('nextplex', ['EventModel', 'ngTouch', 'ngSanitize']);
-
-
 // Index: http://localhost/views/event/index.html
 
-nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
+nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
   var today = new Date().setHours(0,0,0,0);
   var tonight = new Date().setHours(23,59,59,0);
 
@@ -38,7 +35,7 @@ nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
 
 // Show: http://localhost/views/event/show.html?id=<id>
 
-nextplex.controller('ShowCtrl', function ($scope, $filter, EventRestangular) {
+nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular) {
 
   // Fetch all objects from the local JSON (see app/models/event.js)
   EventRestangular.one('events', steroids.view.params['id']).get().then( function(event) {
@@ -46,6 +43,11 @@ nextplex.controller('ShowCtrl', function ($scope, $filter, EventRestangular) {
     $scope.event = event;
     steroids.view.navigationBar.show($scope.event.name);
   });
+
+  $scope.showUser = function(id) {
+    webView = new steroids.views.WebView("/views/user/show.html?id="+id);
+    steroids.layers.push(webView);
+  };
 
   // -- Native navigation
   steroids.view.navigationBar.show("");

@@ -4,6 +4,8 @@ var nextplex = angular.module('nextplex', ['EventModel', 'ngTouch']);
 // Index: http://localhost/views/event/index.html
 
 nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
+  var today = new Date().setHours(0,0,0,0);
+  var tonight = new Date().setHours(23,59,59,0);
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
@@ -20,7 +22,16 @@ nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
   // steroids.view.navigationBar.show("Events");});
   steroids.view.navigationBar.show({
     titleImagePath: "/images/nextplex_logo@2x.png"
-});
+  });
+
+  $scope.todayEvents = function (event) {
+    var eventDate = new Date(event.start_at);
+    return eventDate >= today && eventDate <= tonight;
+  }
+  $scope.upcomingEvents = function (event) {
+    var eventDate = new Date(event.start_at);
+    return eventDate > tonight;
+  }
 
 });
 

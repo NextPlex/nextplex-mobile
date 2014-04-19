@@ -2,10 +2,26 @@
 
   <div ng-controller="IndexCtrl">
     <div class="topcoat-list__container">
-
+      <h3>Events Today</h3>
       <ul class="topcoat-list">
-        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events">
-          {{ event.name }}
+        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | filter:todayEvents ">
+          <h4>{{ event.name }}</h4>
+          <b>{{ event.start_at | date:'M/d/yy h:mm:ss a' }}</b>
+          <span ng-if="event.end_at">
+            -
+            <b>{{ event.end_at | date:'M/d/yy h:mm:ss a' }}</b>
+          </span>
+        </li>
+      </ul>
+      <h3>Upcoming Events</h3>
+      <ul class="topcoat-list">
+        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | filter:upcomingEvents ">
+          <h4>{{ event.name }}</h4>
+          <b>{{ event.start_at | date:'M/d/yy h:mm:ss a' }}</b>
+          <span ng-if="event.end_at">
+            -
+            <b>{{ event.end_at | date:'M/d/yy h:mm:ss a' }}</b>
+          </span>
         </li>
       </ul>
 

@@ -4,7 +4,7 @@
     <div class="topcoat-list__container">
       <h3>Events Today</h3>
       <ul class="topcoat-list">
-        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | filter:todayEvents ">
+        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | orderBy:'start_at' | filter:todayEvents">
           <h4>{{ event.name }}</h4>
           <b>{{ event.start_at | date:'M/d/yy h:mm:ss a' }}</b>
           <span ng-if="event.end_at">
@@ -15,7 +15,7 @@
       </ul>
       <h3>Upcoming Events</h3>
       <ul class="topcoat-list">
-        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | filter:upcomingEvents ">
+        <li class="topcoat-list__item" ng-click="open(event.id)" ng-repeat="event in events | orderBy:'start_at' | filter:upcomingEvents">
           <h4>{{ event.name }}</h4>
           <b>{{ event.start_at | date:'M/d/yy h:mm:ss a' }}</b>
           <span ng-if="event.end_at">

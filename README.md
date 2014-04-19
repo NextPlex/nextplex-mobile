@@ -10,3 +10,7 @@ This app is based on the Steroids multi-page app (MPA) demo app built with Angul
   1. Download [AppGyver Scanner for iOS](https://itunes.apple.com/us/app/appgyver-scanner/id575076515) or [AppGyver Scanner for Android](https://play.google.com/store/apps/details?id=com.appgyver.android&hl=en) and scan the QR code
   2. On OS X, you can also type `sim` in the Steroids console to open the iOS Simulator
 5. As you edit your project's HTML files, press Enter in the Steroids console to push changes to all updated devices.
+
+
+## Original pitch & design slides
+[View them on Speaker Deck](https://speakerdeck.com/nathos/nextplex-mobile-design-prototypes)

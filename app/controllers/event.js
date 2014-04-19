@@ -1,4 +1,4 @@
-var nextplex = angular.module('nextplex', ['EventModel', 'ngTouch']);
+var nextplex = angular.module('nextplex', ['EventModel', 'ngTouch', 'ngSanitize']);
 
 
 // Index: http://localhost/views/event/index.html
@@ -41,9 +41,9 @@ nextplex.controller('IndexCtrl', function ($scope, EventRestangular) {
 nextplex.controller('ShowCtrl', function ($scope, $filter, EventRestangular) {
 
   // Fetch all objects from the local JSON (see app/models/event.js)
-  EventRestangular.all('events').getList().then( function(events) {
+  EventRestangular.one('events', steroids.view.params['id']).get().then( function(event) {
     // Then select the one based on the view's id query parameter
-    $scope.event = $filter('filter')(events, {id: steroids.view.params['id']})[0];
+    $scope.event = event;
     steroids.view.navigationBar.show($scope.event.name);
   });
 

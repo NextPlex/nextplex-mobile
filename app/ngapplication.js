@@ -12,3 +12,11 @@ nextplex.directive('a', function() {
     }
   };
 });
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+// device APIs are available
+//
+function onDeviceReady() {
+    document.body.className += device.platform.toLowerCase();
+}

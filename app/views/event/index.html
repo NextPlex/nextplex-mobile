@@ -1,11 +1,16 @@
 <div ng-app="nextplex">
 
   <div ng-controller="IndexCtrl">
+    <div class="city-info">
+      <h1>Rochester, NY</h1>
+    </div>
     <div class="list-container">
 
       <ul class="table-view">
         <li class="table-view-cell" ng-click="open(event.id)" ng-repeat="event in events">
+          <p class="event-time">{{ event.start_at | date : "shortTime" }}<span ng-if="event.end_at">-{{ event.end_at | date : "shortTime" }}</span></p>
           {{ event.name }}
+          <p class="event-venue">{{ event.venue }}</p>
         </li>
       </ul>
 

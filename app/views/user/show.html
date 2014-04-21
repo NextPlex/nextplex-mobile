@@ -1,0 +1,26 @@
+<div ng-app="nextplex">
+
+  <div ng-controller="UserShowCtrl">
+    <div class="content-padded" ng-if="user">
+      <h2>{{user.first_name}} {{user.last_name}}</h2>
+      <p>
+        {{user.headline}}
+      </p>
+      <p>
+        {{user.twitter}}
+      </p>
+      <p>
+        {{user.website}}
+      </p>
+      <p>
+        {{user.living_in}}
+      </p>
+      <img src="{{user.avatar}}" />
+      <div ng-bind-html="user.profile_html"></div>
+    </div>
+    <div ng-if="no_user">
+      No user found.
+    </div>
+  </div>
+
+</div>

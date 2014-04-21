@@ -13,6 +13,14 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
   // Fetch all objects from the local JSON (see app/models/event.js)
   EventRestangular.all('events').getList().then(function(events){
     $scope.events = events;
+    $scope.todayEvents = events.filter(function (event) {
+      var eventDate = new Date(event.start_at);
+      return eventDate >= today && eventDate <= tonight;
+    });
+    $scope.upcomingEvents = events.filter(function (event) {
+      var eventDate = new Date(event.start_at);
+      return eventDate > tonight;
+    });
   });
 
   // -- Native navigation
@@ -21,14 +29,7 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
     titleImagePath: "/images/nextplex_logo@2x.png"
   });
 
-  $scope.todayEvents = function (event) {
-    var eventDate = new Date(event.start_at);
-    return eventDate >= today && eventDate <= tonight;
-  }
-  $scope.upcomingEvents = function (event) {
-    var eventDate = new Date(event.start_at);
-    return eventDate > tonight;
-  }
+
 
 });
 

@@ -1155,3 +1155,12 @@ select {
 .icon-left:before {
   content: '\e822';
 }
+
+/* Platform-specific styles */
+.ios {
+  @import "ratchet-theme-ios"
+}
+
+.android {
+  @import "ratchet-theme-android"
+}

@@ -15,5 +15,43 @@ input, textarea
 body
   font-family: "Lato"
 
-.city-map
-  display: block
+h1, h2, h3 ,h4
+  font-weight: 300
+
+.city-info
+  background-color: #fff
+  .city-name
+    font-size: 18px
+    font-weight: 400
+    line-height: 2em
+    margin-bottom: 0
+    padding: 0 15px
+    border-top: 1px solid #999
+    border-bottom: 1px solid #999
+    .ios &
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#fff' x='0' y='0' width='100%' height='0.5'/></svg>")
+      background-repeat: no-repeat
+      background-position: 0 100%, 0 0
+      border-top: none
+      border-bottom: none
+  .city-map
+    display: block
+
+.event-list
+  p
+    line-height: 1.1em
+  .event-time
+    font-size: 12px
+  .event-name
+    color: #000
+    font-size: 16px
+    line-height: 1.3em
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+  .event-venue
+    font-size: 11px
+  .table-view-cell
+    padding: 6px 55px 6px 15px
+    & > a:not(.btn)
+      margin: -6px -55px -6px -15px

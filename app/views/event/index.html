@@ -2,22 +2,22 @@
 
   <div ng-controller="EventIndexCtrl">
     <div class="city-info">
-      <h1>Rochester, NY</h1>
+      <h1 class="city-name">Rochester, NY</h1>
       <img class="city-map" src="http://nextplex.com/api/rochester-ny.png">
     </div>
     <div class="list-container">
-      <ul class="table-view">
-        <li ng-show="todayEvents.length" class="table-view-divider">Events Today</li>
+      <ul class="table-view event-list">
+        <li ng-show="todayEvents.length" class="table-view-divider">Today's Events</li>
         <li class="table-view-cell" ng-click="open(event.id)" ng-repeat="event in todayEvents | orderBy:'start_at'">
           <p class="event-time">{{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.start_at | date : 'h:mma' | lowercase }}</span></p>
-          {{ event.name }}
+          <p class="event-name">{{ event.name }}</p>
           <p class="event-venue">{{ event.venue }}</p>
         </li>
         <li ng-show="upcomingEvents.length" class="table-view-divider">Upcoming Events</li>
         <li class="table-view-cell" ng-repeat="event in upcomingEvents | orderBy:'start_at'">
           <a class="navigate-right" ng-click="open(event.id)" >
             <p class="event-time">{{ event.start_at | date : 'MMMM d' }} – {{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.end_at | date : 'h:mma' | lowercase }}</span></p>
-            {{ event.name }}
+            <p class="event-name">{{ event.name }}</p>
             <p class="event-venue">{{ event.venue }}</p>
           </a>
         </li>

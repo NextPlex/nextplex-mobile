@@ -28,6 +28,9 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
     titleImagePath: "/images/nextplex_logo@2x.png"
   });
 
+  // Set page background color
+  steroids.view.setBackgroundColor("#f0eff4");
+
 });
 
 
@@ -50,5 +53,9 @@ nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular
 
   // -- Native navigation
   steroids.view.navigationBar.update("");
+
+  // Set page background color
+  steroids.view.setBackgroundColor("#f0eff4");
+
 
 });

@@ -26,9 +26,9 @@ steroids.config.tabBar.tabs = [
   }
 ]
 
-# steroids.config.tabBar.tintColor = "#000000"
-# steroids.config.tabBar.tabTitleColor = "#00aeef"
-# steroids.config.tabBar.selectedTabTintColor = "#ffffff"
+# steroids.config.tabBar.tintColor = "#31323c"
+# steroids.config.tabBar.tabTitleColor = "#cccccc"
+steroids.config.tabBar.selectedTabTintColor = "#3fa2cf"
 # steroids.config.tabBar.selectedTabBackgroundImage = "icons/pill@2x.png"
 
 # steroids.config.tabBar.backgroundImage = ""

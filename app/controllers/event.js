@@ -6,7 +6,7 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
-    webView = new steroids.views.WebView("/views/event/show.html?id="+id);
+    webView = new steroids.views.WebView("/views/event/show.html?id="+id, {keepLoading: true});
     steroids.layers.push(webView);
   };
 
@@ -41,10 +41,11 @@ nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular
     $scope.event = event;
     $scope.no_event = !event;
     steroids.view.navigationBar.update($scope.event.name);
+    steroids.view.removeLoading();
   });
 
   $scope.showUser = function(id) {
-    webView = new steroids.views.WebView("/views/user/show.html?id="+id);
+    webView = new steroids.views.WebView("/views/user/show.html?id="+id, {keepLoading: true});
     steroids.layers.push(webView);
   };
 

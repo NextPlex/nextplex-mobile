@@ -10,3 +10,9 @@ input, textarea {
 .content-padded {
   padding: 10px;
 }
+
+a[href^=http] {
+  pointer-events: none;
+  text-decoration: none;
+  color: initial;
+}

@@ -32,6 +32,11 @@
     <preference name="KeyboardShrinksView" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
 
+    <!-- Disable back-swipe gesture -->
+    <preference name="EnablePopGestureRecognition" value="false" />
+
+    <!-- Disable double-tap to focus to fix scrolling bug -->
+    <preference name="DisableDoubleTapToFocus" value="true" />
 
     <access origin="*" />
 </widget>

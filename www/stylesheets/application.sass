@@ -1,0 +1,136 @@
+*
+  // Disable selection/copy of elements when tapping for a long time
+  -webkit-user-select: none
+  // Disable touch callouts
+  -webkit-touch-callout: none
+
+input, textarea
+  // Allow selection for input elements
+  -webkit-user-select: text
+
+a[href^=http] {
+  pointer-events: none
+  text-decoration: none
+  color: initial
+
+@import "../vendor/fonts/Lato/lato.scss"
+@import "../vendor/fonts/FontAwesome/font-awesome.scss"
+
+@import "../vendor/ratchet-custom/ratchet.scss"
+
+// Mixins
+
+@mixin ellipsis
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+
+@mixin thin-border-bottom
+  border-top: 1px solid #999
+  border-bottom: 1px solid #999
+  .ios &
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#fff' x='0' y='0' width='100%' height='0.5'/></svg>")
+    background-repeat: no-repeat
+    background-position: 0 100%, 0 0
+    border-top: none
+    border-bottom: none
+
+@mixin thin-border-top-bottom
+  background-color: #fafafa
+  border-top: 1px solid #ddd
+  border-bottom: 1px solid #ddd
+  .ios &
+    background-color: #f0eff4
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>")
+    background-repeat: no-repeat
+    background-position: 0 100%, 0 0
+    border-top: 0
+    border-bottom: 0
+
+body
+  font-family: "Lato"
+
+h1, h2, h3 ,h4
+  font-weight: 300
+
+.city-info
+  background-color: #fff
+  .city-name
+    @include ellipsis
+    font-size: 18px
+    font-weight: 400
+    line-height: 2.4em
+    margin-bottom: 0
+    padding: 0 15px
+    @include thin-border-bottom
+  .city-map
+    display: block
+    margin-bottom: 1px
+
+.event-list
+  p
+    line-height: 1.1em
+  .event-time, .event-venue
+    font-size: 12px
+  .event-name
+    @include ellipsis
+    color: #000
+    font-size: 16px
+    line-height: 1.3em
+  .table-view-cell
+    padding: 6px 55px 6px 15px
+    & > a:not(.btn)
+      margin: -6px -55px -6px -15px
+
+.event-detail
+  background-color: #fff
+  .event-name
+    font-size: 24px
+    line-height: 1.2em
+    margin: 0
+    padding: 10px 15px
+  .event-meta
+    @include thin-border-top-bottom
+    padding: 10px 15px
+    .fa
+      font-size: 14px
+      position: absolute
+      left: 0
+      top: 0
+    .event-datetime, .event-venue
+      padding-left: 1.8em
+      position: relative
+    p
+      color: #333
+      font-weight: bold
+      font-size: 13px
+      line-height: 1.2em
+      margin-bottom: 6px
+      &:last-child
+        margin-bottom: 0
+  .event-description
+    @include thin-border-bottom
+    p
+      color: #000
+      line-height: 1.4em
+      font-size: 14px
+  .attending
+    background-color: #f0eff4
+    padding: 10px 15px
+    .attendee-count
+      color: #7a7a7a
+      text-transform: uppercase
+    .attending-users
+      list-style: none
+      margin-right: -5px
+      padding: 0
+      overflow: hidden
+    .attending-user
+      float: left
+      margin: 0 5px 5px 0
+      img
+        box-sizing: border-box
+        display: block
+        border-radius: 3em
+        border: 3px solid #fff
+        width: 44px

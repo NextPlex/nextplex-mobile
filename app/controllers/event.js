@@ -24,12 +24,9 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
   });
 
   // -- Native navigation
-  // steroids.view.navigationBar.show("Events");});
   steroids.view.navigationBar.show({
     titleImagePath: "/images/nextplex_logo@2x.png"
   });
-
-
 
 });
 
@@ -43,7 +40,7 @@ nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular
     // Then select the one based on the view's id query parameter
     $scope.event = event;
     $scope.no_event = !event;
-    steroids.view.navigationBar.show($scope.event.name);
+    steroids.view.navigationBar.update($scope.event.name);
     steroids.view.removeLoading();
   });
 
@@ -53,6 +50,6 @@ nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular
   };
 
   // -- Native navigation
-  steroids.view.navigationBar.show("");
+  steroids.view.navigationBar.update("");
 
 });

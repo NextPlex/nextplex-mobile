@@ -4,19 +4,22 @@
     <div ng-if="no_event">
       No event found.
     </div>
-    <div class="content-padded">
-      <h2>{{event.name}}</h2>
-      <div ng-bind-html="event.description_html"></div>
-    </div>
+    <div class="event-detail">
+      <h2 class="event-name">{{ event.name }}</h2>
+      <div class="event-meta">
+        <p class="event-datetime" ng-show="event.start_at.length"><i class="fa fa-calendar fa-fw"></i> {{ event.start_at | date : 'EEE MMM d yyyy' }} – {{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.end_at | date : 'h:mma' | lowercase }}</span></p>
+        <p class="event-venue" ng-show="event.venue.length"><i class="fa fa-map-marker fa-fw"></i> {{ event.venue }}</p>
+      </div>
+      <div class="content-padded event-description" ng-bind-html="event.description_html"></div>
 
-    <div class="content-padded">
-      <ul ng-repeat="user in event.attending_users" class="attending_users">
-        <li ng-click="showUser(user.attending_user.id)">
-          <img src="{{user.attending_user.avatar}}" />
-          {{user.attending_user.first_name}}
-          {{user.attending_user.last_name}}
-        </li>
-      </ul>
+      <div class="attending" ng-show="event.attending_users.length">
+        <p class="attendee-count">{{ event.attending_users.length }} Member<span ng-unless="event.attending_users.length">s</span> Attending</p>
+        <ul class="attending-users">
+          <li ng-repeat="user in event.attending_users" ng-click="showUser(user.attending_user.id)" class="attending-user">
+            <img src="{{ user.attending_user.avatar }}" alt="{{ user.attending_user.username }}"/>
+          </li>
+        </ul>
+      </div>
     </div>
 
   </div>

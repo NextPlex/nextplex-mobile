@@ -4,17 +4,21 @@
     <div ng-if="no_event">
       No event found.
     </div>
-    <div class="content-padded">
-      <h2>{{event.name}}</h2>
-      <div ng-bind-html="event.description_html"></div>
+    <div class="event-detail">
+      <h2 class="event-name">{{ event.name }}</h2>
+      <div class="event-meta">
+        <p class="event-datetime">{{ event.start_at | date : 'EEE MMM d yyyy' }} – {{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.end_at | date : 'h:mma' | lowercase }}</span></p>
+        <p class="event-venue">{{ event.venue }}</p>
+      </div>
+      <div class="content-padded" ng-bind-html="event.description_html"></div>
     </div>
 
     <div class="content-padded">
       <ul ng-repeat="user in event.attending_users" class="attending_users">
         <li ng-click="showUser(user.attending_user.id)">
           <img src="{{user.attending_user.avatar}}" />
-          {{user.attending_user.first_name}}
-          {{user.attending_user.last_name}}
+          {{ user.attending_user.first_name }}
+          {{ user.attending_user.last_name }}
         </li>
       </ul>
     </div>

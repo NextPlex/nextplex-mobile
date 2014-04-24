@@ -1,0 +1,22 @@
+<div ng-app="nextplex">
+
+  <div ng-controller="CivicOrganizationShowCtrl">
+    <h1>{{civic_organization.name}}</h1>
+    <img src="{{civic_organization.logo}}" />
+    <p ng-bind-html="civic_organization.description_html"></p>
+    <p ng-bind-html="civic_organization.street_address"></p>
+    <p ng-if="web_address">
+      {{civic_organization.web_address}}
+    </p>
+    <p ng-if="phone">
+      {{civic_organization.phone}}
+    </p>
+    <p ng-if="twitter">
+      {{civic_organization.twitter}}
+    </p>
+    <p ng-if="rss_url">
+      {{civic_organization.rss_url}}
+    </p>
+  </div>
+
+</div>

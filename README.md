@@ -2,7 +2,7 @@
 
 ## Running this app on iOS
 
-Downlaod the [AppGyver Scanner App](https://itunes.apple.com/us/app/appgyver-scanner/id575076515?mt=8)
+Download the [AppGyver Scanner App](https://itunes.apple.com/us/app/appgyver-scanner/id575076515?mt=8)
 from the Apple App Store.
 
 Visit our [AppGyver Share Link](https://share.appgyver.com/?id=11417&hash=841faf4e001b18a3d8119e2984082cc6f06cb468062998a516c3827794a4c170)

@@ -6,8 +6,8 @@ nextplex.controller('EventIndexCtrl', function ($scope, EventRestangular) {
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
-    webView = new steroids.views.WebView("/views/event/show.html?id="+id, {keepLoading: true});
-    steroids.layers.push(webView);
+    webView = new steroids.views.WebView("/views/event/show.html?id="+id);
+    steroids.layers.push({view: webView, keepLoading: true});
   };
 
   // Fetch all objects from the local JSON (see app/models/event.js)
@@ -46,7 +46,7 @@ nextplex.controller('EventShowCtrl', function ($scope, $filter, EventRestangular
 
   $scope.showUser = function(id) {
     webView = new steroids.views.WebView("/views/user/show.html?id="+id, {keepLoading: true});
-    steroids.layers.push(webView);
+    steroids.layers.push({view: webView, keepLoading: true});
   };
 
   // -- Native navigation

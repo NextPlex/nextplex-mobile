@@ -72,6 +72,7 @@ h1, h2, h3 ,h4
     line-height: 1.1em
   .event-time, .event-venue
     font-size: 12px
+    @include ellipsis
   .event-name
     @include ellipsis
     color: #000
@@ -110,10 +111,15 @@ h1, h2, h3 ,h4
         margin-bottom: 0
   .event-description
     @include thin-border-bottom
+    *
+      -webkit-user-select: text
     p
       color: #000
       line-height: 1.4em
       font-size: 14px
+    a
+      word-wrap: break-word
+      color: #777
   .attending
     background-color: #f0eff4
     padding: 10px 15px

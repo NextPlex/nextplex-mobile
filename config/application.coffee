@@ -10,13 +10,13 @@ steroids.config.location = "http://localhost/views/event/index.html"
 steroids.config.tabBar.enabled = true
 steroids.config.tabBar.tabs = [
   {
-    title: "Home"
-    icon: "icons/home@2x.png"
+    title: "Events"
+    icon: "icons/Flag@2x.png"
     location: "http://localhost/views/event/index.html"
   },
   {
-    title: "Directory"
-    icon: "icons/list@2x.png"
+    title: "Resource Directory"
+    icon: "icons/Light_Bulb@2x.png"
     location: "http://localhost/views/directory/index.html"
   }
 ]

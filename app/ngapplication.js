@@ -1,4 +1,4 @@
-var nextplex = angular.module('nextplex', ['EventModel', 'UserModel', 'ngTouch', 'ngSanitize']);
+var nextplex = angular.module('nextplex', ['EventModel', 'UserModel', 'CivicOrganizationModel', 'ngTouch', 'ngSanitize']);
 
 document.addEventListener("deviceready", onDeviceReady, false);
 

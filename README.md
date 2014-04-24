@@ -11,7 +11,7 @@ and scan the QR Code using the app you just downloaded.
 ## Running this app on Android
 
 This app *can* run on Android, however, our testing did not cover this platform,
-and we would not like to include this platform with out ATTROC hackathon submission
+and we would not like to include this platform with our ATTROC hackathon submission
 
 ## Note about our app
 

@@ -1,8 +1,10 @@
 <div ng-app="nextplex">
   <div ng-controller="CivicOrganizationIndexCtrl">
-    <ul class="table-view" ng-repeat="organization in civic_organizations">
-      <li class="table-view-cell" ng-click="open(organization.id)">
-        <b>{{organization.name}}</b>
+    <ul class="table-view">
+      <li class="table-view-cell" ng-repeat="organization in civic_organizations">
+        <a class="navigate-right" ng-click="open(organization.id)">
+          {{organization.name}}
+        </a>
       </li>
     </ul>
   </div>

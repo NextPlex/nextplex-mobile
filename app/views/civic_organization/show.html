@@ -1,22 +1,30 @@
 <div ng-app="nextplex">
 
-  <div ng-controller="CivicOrganizationShowCtrl">
-    <h1>{{civic_organization.name}}</h1>
-    <img src="{{civic_organization.logo}}" />
-    <p ng-bind-html="civic_organization.description_html"></p>
-    <p ng-bind-html="civic_organization.street_address"></p>
-    <p ng-if="web_address">
-      {{civic_organization.web_address}}
-    </p>
-    <p ng-if="phone">
-      {{civic_organization.phone}}
-    </p>
-    <p ng-if="twitter">
-      {{civic_organization.twitter}}
-    </p>
-    <p ng-if="rss_url">
-      {{civic_organization.rss_url}}
-    </p>
+  <div class="org-detail" ng-controller="CivicOrganizationShowCtrl">
+    <h1 class="org-name">{{civic_organization.name}}</h1>
+    <div class="org-meta">
+      <p class="org-website" ng-if="civic_organization.web_address">
+        <i class="fa fa-globe fa-fw"></i>
+        {{civic_organization.web_address}}
+      </p>
+      <p class="org-phone" ng-if="civic_organization.phone">
+        <i class="fa fa-phone fa-fw"></i>
+        {{civic_organization.phone}}
+      </p>
+      <p class="org-twitter" ng-if="civic_organization.twitter">
+        <i class="fa fa-twitter fa-fw"></i>
+        @{{civic_organization.twitter}}
+      </p>
+      <p class="org-rss" ng-if="civic_organization.rss_url">
+        <i class="fa fa-rss fa-fw"></i>
+        {{civic_organization.rss_url}}
+      </p>
+    </div>
+    <div class="org-description content-padded">
+      <img src="http://s3.amazonaws.com/join_roc_pro/{{ civic_organization.logo }}" ng-if="civic_organization.logo" />
+      <p ng-bind-html="civic_organization.description_html"></p>
+      <p ng-bind-html="civic_organization.street_address"></p>
+    </div>
   </div>
 
 </div>

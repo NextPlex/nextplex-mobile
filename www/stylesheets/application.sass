@@ -83,14 +83,14 @@ h1, h2, h3 ,h4
     & > a:not(.btn)
       margin: -8px -55px -8px -15px
 
-.event-detail, .user-detail
+.event-detail, .user-detail, .org-detail
   background-color: #fff
-  .event-name, .user-name
+  .event-name, .user-name, .org-name
     font-size: 24px
     line-height: 1.2em
     margin: 0
     padding: 10px 15px
-  .event-meta, .user-meta
+  .event-meta, .user-meta, .org-meta
     @include thin-border-top-bottom
     padding: 10px 15px
     .fa
@@ -98,7 +98,7 @@ h1, h2, h3 ,h4
       position: absolute
       left: 0
       top: 0
-    .event-datetime, .event-venue, .user-headline, .user-twitter, .user-website, .user-livingin
+    .event-datetime, .event-venue, .user-headline, .user-twitter, .user-website, .user-livingin, .org-headline, .org-twitter, .org-website, .org-phone, .org-rss
       padding-left: 1.8em
       position: relative
     p
@@ -109,7 +109,7 @@ h1, h2, h3 ,h4
       margin-bottom: 6px
       &:last-child
         margin-bottom: 0
-  .event-description, .user-profile
+  .event-description, .user-profile, .org-description
     @include thin-border-bottom
     *
       -webkit-user-select: text

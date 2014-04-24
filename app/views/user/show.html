@@ -1,22 +1,30 @@
 <div ng-app="nextplex">
 
   <div ng-controller="UserShowCtrl">
-    <div class="content-padded" ng-if="user">
-      <h2>{{user.first_name}} {{user.last_name}}</h2>
-      <p>
-        {{user.headline}}
-      </p>
-      <p>
-        {{user.twitter}}
-      </p>
-      <p>
-        {{user.website}}
-      </p>
-      <p>
-        {{user.living_in}}
-      </p>
-      <img src="{{user.avatar}}" />
-      <div ng-bind-html="user.profile_html"></div>
+    <div class="user-detail" ng-if="user">
+      <h2 class="user-name">{{user.first_name}} {{user.last_name}}</h2>
+      <div class="user-meta">
+        <p class="user-headline" ng-if="user.headline">
+          <i class="fa fa-quote-right fa-fw"></i>
+          {{user.headline}}
+        </p>
+        <p class="user-twitter" ng-if="user.twitter">
+          <i class="fa fa-twitter fa-fw"></i>
+          @{{user.twitter}}
+        </p>
+        <p class="user-website" ng-if="user.website">
+          <i class="fa fa-globe fa-fw"></i>
+          {{user.website}}
+        </p>
+        <p class="user-livingin" ng-if="user.livingin">
+          <i class="fa fa-map-marker fa-fw"></i>
+          {{user.living_in}}
+        </p>
+      </div>
+      <div class="user-profile content-padded">
+        <img src="{{user.avatar}}" />
+        <div ng-bind-html="user.profile_html"></div>
+      </div>
     </div>
     <div ng-if="no_user">
       No user found.

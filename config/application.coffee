@@ -15,7 +15,7 @@ steroids.config.tabBar.tabs = [
     location: "http://localhost/views/event/index.html"
   },
   {
-    title: "Civic Organizations"
+    title: "Civic Directory"
     icon: "icons/Light_Bulb@2x.png"
     location: "http://localhost/views/civic_organization/index.html"
   }

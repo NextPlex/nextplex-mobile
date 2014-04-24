@@ -72,24 +72,25 @@ h1, h2, h3 ,h4
     line-height: 1.1em
   .event-time, .event-venue
     font-size: 12px
+    @include ellipsis
   .event-name
     @include ellipsis
     color: #000
     font-size: 16px
     line-height: 1.3em
   .table-view-cell
-    padding: 6px 55px 6px 15px
+    padding: 8px 55px 8px 15px
     & > a:not(.btn)
-      margin: -6px -55px -6px -15px
+      margin: -8px -55px -8px -15px
 
-.event-detail
+.event-detail, .user-detail
   background-color: #fff
-  .event-name
+  .event-name, .user-name
     font-size: 24px
     line-height: 1.2em
     margin: 0
     padding: 10px 15px
-  .event-meta
+  .event-meta, .user-meta
     @include thin-border-top-bottom
     padding: 10px 15px
     .fa
@@ -97,7 +98,7 @@ h1, h2, h3 ,h4
       position: absolute
       left: 0
       top: 0
-    .event-datetime, .event-venue
+    .event-datetime, .event-venue, .user-headline, .user-twitter, .user-website, .user-livingin
       padding-left: 1.8em
       position: relative
     p
@@ -108,12 +109,17 @@ h1, h2, h3 ,h4
       margin-bottom: 6px
       &:last-child
         margin-bottom: 0
-  .event-description
+  .event-description, .user-profile
     @include thin-border-bottom
+    *
+      -webkit-user-select: text
     p
       color: #000
       line-height: 1.4em
       font-size: 14px
+    a
+      word-wrap: break-word
+      color: #777
   .attending
     background-color: #f0eff4
     padding: 10px 15px

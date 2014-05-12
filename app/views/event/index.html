@@ -10,7 +10,7 @@
         <li ng-show="todayEvents.length" class="table-view-divider">Today's Events</li>
         <li class="table-view-cell" ng-repeat="event in todayEvents | orderBy:'start_at'">
           <a class="navigate-right" ng-click="open(event.id)">
-            <p class="event-time">{{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.start_at | date : 'h:mma' | lowercase }}</span></p>
+            <p class="event-time">{{ event.start_at | date : 'h:mma' | lowercase }}<span ng-if="event.end_at">-{{ event.end_at | date : 'h:mma' | lowercase }}</span></p>
             <p class="event-name">{{ event.name }}</p>
             <p class="event-venue">{{ event.venue }}</p>
           </a>
